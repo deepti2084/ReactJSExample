@@ -30,34 +30,33 @@ class ContactDetails extends Component {
     const { firstName, lastName, phoneNumber, email, id } = this.props.contact;
 
     return (
-      <div>
-        <table>
-          <tr>
-            <td className="row">
-              {firstName}
-            </td>
-            <td className="row">
-              {lastName}
-            </td>
-            <td className="row">
-              {email}
-            </td>
-            <td className="row">
-              {phoneNumber}
-            </td>
-            <td className="row">
-              <button  className="btn btn-primary" onClick={this.handleEdit}>
-                <Link to="/editContact">Edit Contact</Link>
-              </button>
-            </td>
-            <td className="row">
-              <button  className="btn btn-primary" onClick={this.handleDelete}>
-                 Delete Contact
-              </button>
-            </td>
-          </tr>
-        </table>
-      </div>
+
+          <tbody>
+            <tr>
+              <td className="row">
+                {firstName}
+              </td>
+              <td className="row">
+                {lastName}
+              </td>
+              <td className="row">
+                {email}
+              </td>
+              <td className="row">
+                {phoneNumber}
+              </td>
+              <td className="row">
+                <button  className="btn btn-primary" onClick={this.handleEdit}>
+                  <Link to="/editContact">Edit Contact</Link>
+                </button>
+              </td>
+              <td className="row">
+                <button  className="btn btn-primary" onClick={this.handleDelete}>
+                   Delete Contact
+                </button>
+              </td>
+            </tr>
+          </tbody>
   )
   }
 }

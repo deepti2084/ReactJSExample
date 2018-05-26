@@ -37,8 +37,10 @@ class ListContacts extends Component {
       <em>Please add some products to cart.</em>
     )
       return (
-        <div>
-          {content}
+        <div className="listContact">
+          <table className="contactListTable">
+            {content}
+          </table>
         </div>
       )
     }

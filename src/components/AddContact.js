@@ -8,19 +8,21 @@ const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators(actions, dispatch)
 });
 
+const initialState = {
+  id: -1,
+  firstName: '',
+  lastName: '',
+  email: '',
+  phoneNumber: '',
+  status: '',
+}
+
 class AddContact extends Component {
   constructor(props){
     super(props);
 
     this.state = {
-      contactDetails: {
-        id: Math.floor((Math.random() * 100) + 1),
-        firstName: '',
-        lastName: '',
-        email: '',
-        phoneNumber: '',
-        status: '',
-      }
+      contactDetails: initialState
     }
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -32,39 +34,33 @@ class AddContact extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    this.props.actions.addContact(this.state.contactDetails);
-    //this.props.actions.navigateToListContact();
+    this.props.actions.addContact({...this.state.contactDetails, id:Math.floor((Math.random() * 100) + 1) });
+    this.setState ({
+      contactDetails: initialState
+    })
   }
 
   onFirstNameChange(e) {
-    const contactDetails = Object.assign(this.state.contactDetails);
-    contactDetails.firstName = e.currentTarget.value;
     this.setState({
-      contactDetails
+      contactDetails: { ...this.state.contactDetails, firstName: e.currentTarget.value }
     })
   }
 
   onLastNameChange(e) {
-    const contactDetails = Object.assign(this.state.contactDetails);
-    contactDetails.lastName = e.currentTarget.value;
     this.setState({
-      contactDetails
+      contactDetails: { ...this.state.contactDetails, lastName: e.currentTarget.value }
     })
   }
 
   onEmailChange(e) {
-    const contactDetails = Object.assign(this.state.contactDetails);
-    contactDetails.email = e.currentTarget.value;
     this.setState({
-      contactDetails
+      contactDetails: { ...this.state.contactDetails, email: e.currentTarget.value }
     })
   }
 
   onPhoneNumberChange(e) {
-    const contactDetails = Object.assign(this.state.contactDetails);
-    contactDetails.phoneNumber = e.currentTarget.value;
     this.setState({
-      contactDetails
+      contactDetails: { ...this.state.contactDetails, phoneNumber: e.currentTarget.value }
     })
   }
 
