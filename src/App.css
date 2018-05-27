@@ -22,12 +22,11 @@
   font-size: large;
 }
 
-
 .row {
     border: 1px solid black;
     padding: 20px;
     max-width: 150px;
-    width: 150px;
+    width: 100px;
     word-wrap: break-word;
 }
 
@@ -57,7 +56,6 @@
 .form-input{
   margin-left: 10px;
 }
-
 
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }

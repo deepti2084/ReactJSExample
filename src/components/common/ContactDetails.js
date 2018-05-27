@@ -27,7 +27,7 @@ class ContactDetails extends Component {
 
 
   render() {
-    const { firstName, lastName, phoneNumber, email, id } = this.props.contact;
+    const { firstName, lastName, phoneNumber, email, id, status } = this.props.contact;
 
     return (
 
@@ -44,6 +44,9 @@ class ContactDetails extends Component {
               </td>
               <td className="row">
                 {phoneNumber}
+              </td>
+              <td className="row">
+                {status}
               </td>
               <td className="row">
                 <button  className="btn btn-primary" onClick={this.handleEdit}>

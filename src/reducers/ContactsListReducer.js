@@ -14,6 +14,7 @@ const initialState = {
     email: 'a@c.com',
     phoneNumber: '1234567890',
     id: 12,
+    status: 'Active',
   }]
 };
 

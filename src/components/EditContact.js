@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'
 import * as actions from '../actions/ContactsListActions';
 import { Input } from './common/Input';
+import { SelectInput } from './common/SelectInput';
 import {getContactById} from '../reducers/ContactsListSelector'
 
 const intialState = {
@@ -38,12 +39,13 @@ class EditContact extends Component {
     this.onLastNameChange = this.onLastNameChange.bind(this);
     this.onEmailChange = this.onEmailChange.bind(this);
     this.onPhoneNumberChange = this.onPhoneNumberChange.bind(this);
+    this.onStatusChange = this.onStatusChange.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState = {
+    this.setState ({
       contactDetails: nextProps.contactDetails,
-    }
+    });
   }
 
   handleSubmit(e) {
@@ -52,39 +54,37 @@ class EditContact extends Component {
   }
 
   onFirstNameChange(e) {
-    const contactDetails = Object.assign(this.state.contactDetails);
-    contactDetails.firstName = e.currentTarget.value;
     this.setState({
-      contactDetails
+      contactDetails: { ...this.state.contactDetails, firstName: e.currentTarget.value }
     })
   }
 
   onLastNameChange(e) {
-    const contactDetails = Object.assign(this.state.contactDetails);
-    contactDetails.lastName = e.currentTarget.value;
     this.setState({
-      contactDetails
+      contactDetails: { ...this.state.contactDetails, lastName: e.currentTarget.value }
     })
   }
 
   onEmailChange(e) {
-    const contactDetails = Object.assign(this.state.contactDetails);
-    contactDetails.email = e.currentTarget.value;
     this.setState({
-      contactDetails
+      contactDetails: { ...this.state.contactDetails, email: e.currentTarget.value }
     })
   }
 
   onPhoneNumberChange(e) {
-    const contactDetails = Object.assign(this.state.contactDetails);
-    contactDetails.phoneNumber = e.currentTarget.value;
     this.setState({
-      contactDetails
+      contactDetails: { ...this.state.contactDetails, phoneNumber: e.currentTarget.value }
+    })
+  }
+
+  onStatusChange(e) {
+    this.setState({
+      contactDetails: { ...this.state.contactDetails, status: e.currentTarget.value }
     })
   }
 
   render () {
-    const { firstName, lastName, email, phoneNumber } = this.state.contactDetails;
+    const { firstName, lastName, email, phoneNumber, status } = this.state.contactDetails;
     return (
      <form className="addContactForm" onSubmit={this.handleSubmit}>
        <h2>Edit Contact</h2>
@@ -95,6 +95,7 @@ class EditContact extends Component {
           type="text"
           value={firstName}
           onChange={this.onFirstNameChange}
+          placeholder="Enter First Name"
           />
 
         <Input
@@ -106,7 +107,7 @@ class EditContact extends Component {
            placeholder="Enter Last Name"
         />
 
-         <Input
+        <Input
             title="Email address"
             name="email"
             type="email"
@@ -117,13 +118,21 @@ class EditContact extends Component {
         />
 
        <Input
-          title="Phone Number (Format: 123456789)"
-          name="phoneNumber"
-          type="text"
-          value={phoneNumber}
-          onChange={this.onPhoneNumberChange}
-          placeholder="Enter phone number"
-      />
+            title="Phone Number (Format: 123456789)"
+            name="phoneNumber"
+            type="text"
+            value={phoneNumber}
+            onChange={this.onPhoneNumberChange}
+            placeholder="Enter phone number"
+        />
+
+      <SelectInput
+          name="status"
+          onChange={this.onStatusChange}
+          placeholder="Select the contact status"
+          title="Status"
+          value={status}
+        />
 
        <button  className="btn btn-primary">
           Update Contact

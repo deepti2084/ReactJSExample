@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as actions from '../actions/ContactsListActions';
 import { Input } from './common/Input';
+import { SelectInput } from './common/SelectInput';
 
 const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators(actions, dispatch)
@@ -14,7 +15,7 @@ const initialState = {
   lastName: '',
   email: '',
   phoneNumber: '',
-  status: '',
+  status: 'Active',
 }
 
 class AddContact extends Component {
@@ -30,6 +31,7 @@ class AddContact extends Component {
     this.onLastNameChange = this.onLastNameChange.bind(this);
     this.onEmailChange = this.onEmailChange.bind(this);
     this.onPhoneNumberChange = this.onPhoneNumberChange.bind(this);
+    this.onStatusChange = this.onStatusChange.bind(this);
   }
 
   handleSubmit(e) {
@@ -64,8 +66,14 @@ class AddContact extends Component {
     })
   }
 
+  onStatusChange(e) {
+    this.setState({
+      contactDetails: { ...this.state.contactDetails, status: e.currentTarget.value }
+    })
+  }
+
   render () {
-    const { firstName, lastName, email, phoneNumber } = this.state.contactDetails;
+    const { firstName, lastName, email, phoneNumber, status } = this.state.contactDetails;
     return (
      <form className="addContactForm" onSubmit={this.handleSubmit}>
        <h2 className="title">Add Contact</h2>
@@ -89,7 +97,7 @@ class AddContact extends Component {
         />
 
          <Input
-            title="Email address"
+            title="Email Address"
             name="email"
             type="email"
             value={email}
@@ -105,6 +113,14 @@ class AddContact extends Component {
           value={phoneNumber}
           onChange={this.onPhoneNumberChange}
           placeholder="Enter phone number"
+      />
+
+      <SelectInput
+        name="status"
+        onChange={this.onStatusChange}
+        placeholder="Select the contact status"
+        title="Status"
+        value={status}
       />
 
        <button  className="btn btn-primary">
